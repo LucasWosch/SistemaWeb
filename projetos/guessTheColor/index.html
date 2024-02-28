@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Box</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-box">
+            <h2>Guess the color</h2>
+            <p>Trys: <b id="try-amounts">0</b></p>
+            <p>
+                Color List: <br>
+                <ul>
+                    <li class="color-option red">RED</li>
+                    <li class="color-option blue">BLUE</li>
+                    <li class="color-option yellow">YELLOW</li>
+                    <li class="color-option green">GREEN</li>
+                    <li class="color-option brown">BROWN</li>
+                    <li class="color-option black">BLACK</li>
+                    <li class="color-option white">WHITE</li>
+                    <li class="color-option purple">PURPLE</li>
+                </ul>
+            </p>
+            <p>
+                Pick a color:
+                <input type="text" id="input-color">
+                <button id='button-submit-color' onclick="submitColor()">
+                    Try color
+                </button>
+            </p>
+            <p>
+                <button style="display: none;" id="try-again-button" onclick="window.location.reload()">Try Again</button>
+            </p>
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+</html>
