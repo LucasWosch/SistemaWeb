@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corrida de Carros</title>
+    <style>
+        .carro {
+            width: 50px;
+            height: 30px;
+            position: absolute;
+            background-color: red;
+        }
+        .pista {
+            width: 100%;
+            height: 5px;
+            background-color: black;
+            position: absolute;
+        }
+        .escolha {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="moedas">Moedas: 100</div>
+    <div class="escolha">
+        Escolha seu carro:
+        <select id="carroEscolhido">
+            <option value="1">Carro 1</option>
+            <option value="2">Carro 2</option>
+            <option value="3">Carro 3</option>
+            <option value="4">Carro 4</option>
+        </select>
+        Aposte suas moedas:
+        <input type="number" id="aposta" value="0">
+        <button onclick="iniciarCorrida()">Iniciar Corrida</button>
+    </div>
+    <div id="carro1" class="carro" style="top: 50px;">Carro 1</div>
+    <div id="carro2" class="carro" style="top: 100px;">Carro 2</div>
+    <div id="carro3" class="carro" style="top: 150px;">Carro 3</div>
+    <div id="carro4" class="carro" style="top: 200px;">Carro 4</div>
+    <div class="pista" style="top: 80px;"></div>
+    <div class="pista" style="top: 130px;"></div>
+    <div class="pista" style="top: 180px;"></div>
+    <div class="pista" style="top: 230px;"></div>
+
+    <script>
+        function iniciarCorrida() {
+            let carroEscolhido = document.getElementById('carroEscolhido').value;
+            let aposta = parseInt(document.getElementById('aposta').value);
+
+            // Verifique se o usuário tem moedas suficientes para fazer a aposta
+            if (aposta > moedas) {
+                alert('Você não tem moedas suficientes para fazer essa aposta.');
+                return;
+            }
+
+            // Subtraia a aposta do total de moedas
+            moedas -= aposta;
+
+            let intervalo = setInterval(() => {
+                for (let i = 1; i <= 4; i++) {
+                    let velocidades = [Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10];
+                    let carro = document.getElementById('carro' + i);
+                    let posicaoAtual = carro.offsetLeft;
+                    carro.style.left = posicaoAtual + velocidades[i - 1] + 'px';
+                    if (posicaoAtual >= window.innerWidth - 50) {
+                        clearInterval(intervalo);
+                        if (i == carroEscolhido) {
+                            moedas += aposta * 2; // Dobre as moedas apostadas
+                            alert('Parabéns! Seu carro (Carro ' + i + ') venceu! Você ganhou ' + (aposta * 2) + ' moedas.');
+                        } else {
+                            alert('Que pena! Seu carro (Carro ' + carroEscolhido + ') perdeu. Você perdeu todas as ' + aposta + ' moedas. Carro ' + i + ' venceu!');
+                        }
+                        document.getElementById('moedas').innerText = 'Moedas: ' + str(moedas); // Atualize a exibição de moedas
+                        break;
+                    }
+                }
+            }, 100);
+        }
+
+    </script>
+</body>
+</html>
